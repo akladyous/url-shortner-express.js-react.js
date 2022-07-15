@@ -1,6 +1,7 @@
-import validator from 'validator';
 import mongoose from "mongoose";
+import { $ } from '../util/util.js'
 const { Schema } = mongoose;
+
 const userSchema = new Schema(
     {
         email: {
@@ -9,13 +10,7 @@ const userSchema = new Schema(
             lowercase: true,
             unique: [true, "Email already exists"],
             validate: {
-                validator: function validateEmail(v) {
-                    if (validator.isEmail(v)) {
-                        return true
-                    } else {
-                        return false
-                    }
-                },
+                validator: function (v) { return $.isValidEmail(v) },
                 message: (props) => { return `${props.value} is not valid Email` }
             }
         },
@@ -43,7 +38,7 @@ const userSchema = new Schema(
             default: null
         }
     },
-    { timestamps: true }
+    { timestamps: true, toJSON: { virtuals: true } }
 );
 
 userSchema.statics.login = async function (email, password) {

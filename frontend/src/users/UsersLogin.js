@@ -7,7 +7,7 @@ import { verifyJWT } from "../util/verifyJWT.js";
 import { setUser, setUserState } from "../features/users/userSlice.js";
 import { _objectWithoutPropertiesLoose } from '../util/babel'
 import validate from 'validate.js'
-import {constrains} from '../util/validation'
+import { constrains } from '../util/validation'
 
 import { setToken } from '../features/token/tokenSlice.js'
 
@@ -19,8 +19,8 @@ export default function UsersLogin() {
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
 
-    let [ login,{ isLoading, isFetching } ] = useLoginMutation();
-    
+    let [login, { isLoading, isFetching }] = useLoginMutation();
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState('')
@@ -34,8 +34,6 @@ export default function UsersLogin() {
             dispatch(setUser(_objectWithoutPropertiesLoose(userData, ['iat', 'exp'])));
             dispatch(setUserState(true));
             dispatch(setToken(accessToken))
-            setEmail('')
-            setPassword('')
             setMessage('Login successfully completed')
             setTimeout(() => {
                 navigate(from, { replace: true });
@@ -50,14 +48,14 @@ export default function UsersLogin() {
         }
     };
 
-    const validateInput = e =>{
+    const validateInput = e => {
         const target = e.target;
         const feedback = e.target.nextElementSibling;
         let validationError = null;
 
         if (target.value.toString().length > 0) {
             validationError = validate.single(target.value, constrains[target.name]);
-            if ( !validationError ){
+            if (!validationError) {
                 feedback.classList.add("valid-feedback");
                 feedback.textContent = "";
                 target.classList = 'form-control is-valid'
@@ -166,7 +164,7 @@ export default function UsersLogin() {
                                         >
                                             Submit
                                         </button>
-                                        <p 
+                                        <p
                                             disabled
                                             className="text-center border-0 form-control"
                                             aria-describedby="response"

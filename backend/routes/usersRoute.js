@@ -1,8 +1,8 @@
 import express from 'express';
-import { signup } from '../controller/users/signup.js';
-import { signin } from '../controller/users/signin.js';
-import { signout } from '../controller/users/signout.js';
-import { updateUser } from "../controller/users/updateUser.js"
+import { signup } from '../controllers/users/signup.js';
+import { signin } from '../controllers/users/signin.js';
+import { signout } from '../controllers/users/signout.js';
+import { updateUser } from "../controllers/users/updateUser.js"
 export const usersRoute = express.Router();
 
 usersRoute.get("/users", (req, res) => {
