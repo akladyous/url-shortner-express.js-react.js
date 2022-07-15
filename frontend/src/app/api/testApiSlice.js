@@ -21,4 +21,4 @@ export const {
     useLazyGetUsersQuery,
     useGetUsersQuery,
     useSetUsersMutation
-} = testApiSlice
+} = testApiSlice;

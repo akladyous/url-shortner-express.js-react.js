@@ -7,14 +7,14 @@ import { User } from "../models/Users.js";
 import Auth from "../util/auth.js";
 
 export const handleRefreshToken = async (req, res) => {
-    
+    debugger
     // if (!req.cookies?.token)
     //     return res
     //         .status(401)
     //         .json({ error: "User Authorization Error: Missing Token" });
     // const refreshToken = req.cookies.token;
 
-    if (!req.session?.token){
+    if (!req.session?.token) {
         return res
             .status(401)
             .json({ error: "User Authorization Error: Missing Token" });

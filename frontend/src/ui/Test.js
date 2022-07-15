@@ -1,28 +1,33 @@
-import { useSelector, useDispatch } from "react-redux";
-import {
-    useGetUsersQuery,
-    useLazyGetUsersQuery,
-    useSetUsersMutation,
-} from "../app/api/testApiSlice.js";
-
-import { tokenState } from "../features/token/tokenSlice.js";
-import { testAction } from "../app/thunkAPI/test/testAction.js";
 import { useState } from "react";
+import { useSetUrlMutation } from "../app/api/urlApiSlice.js";
+import { useSelector, useDispatch } from "react-redux";
+// import {
+//     useGetUsersQuery,
+//     useLazyGetUsersQuery,
+//     useSetUsersMutation,
+// } from "../app/api/testApiSlice.js";
+
+// import { tokenState } from "../features/token/tokenSlice.js";
+// import { testAction } from "../app/thunkAPI/test/testAction.js";
 
 export default function Test() {
-    const { token } = useSelector(tokenState);
     const dispatch = useDispatch();
+    const [originalUrl, setOriginalUrl] = useState("");
 
-    let [setUsers, { isError, isLoading }] = useSetUsersMutation();
+    // const { token } = useSelector(tokenState);
+    // let [setUsers, { isError, isLoading }] = useSetUsersMutation();
     // let {data, error} =  useGetUsersQuery()
-    const [getusers, result, lastPromiseInfo] = useLazyGetUsersQuery();
+    // const [getusers, result, lastPromiseInfo] = useLazyGetUsersQuery();
     // let [getUsers, {isLoading, isError, error}] = useGetUsersQuery()
-
-    const [url, setUrl] = useState("");
+    let [setUrl, { isError, isLoading }] = useSetUrlMutation();
 
     const handleTest = (e) => {
         e.preventDefault();
-
+        console.log("originalUrl : ", originalUrl);
+        setUrl({
+            url: "url",
+            data: { url: originalUrl },
+        });
         // dispatch(testAction());
         // getusers()
         // console.log('result : ', result)
@@ -36,9 +41,9 @@ export default function Test() {
                 <input
                     type="text"
                     name="originalUrl"
-                    value={url}
+                    value={originalUrl}
                     onChange={(e) => {
-                        setUrl(e.target.value);
+                        setOriginalUrl(e.target.value);
                     }}
                 />
                 <br />
