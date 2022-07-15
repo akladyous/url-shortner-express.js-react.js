@@ -1,4 +1,4 @@
-import { SESSION_NAME } from "../../config/env";
+import { SESSION_NAME } from "../../config/env.js";
 import { User } from "../../models/Users.js";
 
 export const signout = async (req, res) => {
@@ -9,7 +9,7 @@ export const signout = async (req, res) => {
     //         .json({ error: "User Authorization Error: Unable to logout" });
     // }
     // const refreshToken = req.cookies.token;
-    
+
     if (!req.session.token) {
         return res
             .status(204)
@@ -21,7 +21,7 @@ export const signout = async (req, res) => {
     if (!userExists) {
         // res.cookie('token', '', { maxAge: 1 })
         // res.clearCookie('token', { httpOnly: true, sameSite: 'None', secure: true });
-        req.session.destroy()    
+        req.session.destroy()
         return res
             .status(204)
             .json({ error: "User Authorization Error: User not found" });

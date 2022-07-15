@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
-import {DATABASE_URI} from "./env.js"
+import { DATABASE_URI } from "./env.js"
 
-export const dbConnect = async () => {
+export const dbConnect = () => {
     try {
-        await mongoose.connect(DATABASE_URI, {
+        mongoose.connect(DATABASE_URI, {
             useUnifiedTopology: true,
             useNewUrlParser: true,
             maxPoolSize: 10,

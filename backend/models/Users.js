@@ -1,9 +1,6 @@
-import {isEmail} from "validator";
+import validator from 'validator';
 import mongoose from "mongoose";
 const { Schema } = mongoose;
-// import bcrypt from "bcrypt";
-
-
 const userSchema = new Schema(
     {
         email: {
@@ -11,7 +8,16 @@ const userSchema = new Schema(
             required: [true, "Email required, Please enter an email"],
             lowercase: true,
             unique: [true, "Email already exists"],
-            validate: [isEmail, "Please enter a valid email"],
+            validate: {
+                validator: function validateEmail(v) {
+                    if (validator.isEmail(v)) {
+                        return true
+                    } else {
+                        return false
+                    }
+                },
+                message: (props) => { return `${props.value} is not valid Email` }
+            }
         },
         password: {
             type: String,
