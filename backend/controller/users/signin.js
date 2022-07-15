@@ -18,20 +18,11 @@ export const signin = async (req, res, next) => {
 
     try {
         const user = await User.findOne({ email: email }).exec();
-        if (!user) {
-            return res.status(401).json({
-                error: { message: "Unauthorized User - user not found" },
-            }); //unauthorized
-        }
-        const validPassword = await Auth.isValidPassword(
-            password,
-            user.password
-            );
-        if (!validPassword) {
-            return res.status(400).json({
-                error: { message: "Unauthorized User - missing email or password" },
-            });
-        }
+        if (!user) return res.status(401).json({ error: { message: "Unauthorized User - user not found" } }); //unauthorized
+
+        const validPassword = await Auth.isValidPassword(password, user.password);
+        if (!validPassword) return res.status(400).json({ error: { message: "Unauthorized User - missing email or password" }, });
+
         const accessToken = await Auth.jwtSign(
             { id: user._id, email: user.email, lastLoginAt: user.lastLoginAt },
             ACCESS_TOKEN_SECRET,
@@ -46,15 +37,8 @@ export const signin = async (req, res, next) => {
         user.refreshToken = refreshToken;
         user.lastLoginAt = new Date()
         await user.save();
-        
+
         req.session.token = refreshToken;
-        // console.log('req.session.token : ', req.session)
-        // res.cookie("token", refreshToken, {
-        //     maxAge: COOKIE_TIMEOUT,
-        //     httpOnly: true,
-        //     // sameSite: "None",
-        //     secure: true,
-        // });
         res.status(200).json(accessToken);
 
     } catch (error) {

@@ -9,5 +9,7 @@ export const corsOptions = {
         }
     },
     optionsSuccessStatus: 200,
-    // credentials: true,
+    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+    "preflightContinue": false,
+    credentials: true,
 };

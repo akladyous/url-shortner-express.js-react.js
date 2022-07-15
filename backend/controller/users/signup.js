@@ -25,45 +25,31 @@ const handleErrors = (err) => {
 export const signup = async (req, res) => {
     const { email, password } = req.body;
     console.log('response.body', req.body)
-    if ( !email || !password ) {
-        return res
-        .status(409)
-        .json({ error: { message: "Missing e-mail or password" } });
-    }
-    
+    if (!email || !password) return res.status(409).json({ error: { message: "Missing e-mail or password" } });
+
     try {
         const userExists = await User.findOne({ email }).exec();
-        if (userExists) {
-            return res
-                .status(409)
-                .json({ error: { message: "User already Exists" } });
-        }
+        if (userExists) return res.status(409).json({ error: { message: "User already Exists" } });
+
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const user = await User.create({
-            email: email,
-            password: hashedPassword,
-            lastLoginAt: new Date(),
-        });
+        const user = await User.create({ email: email, password: hashedPassword, lastLoginAt: new Date() });
         const accessToken = await Auth.jwtSign(
             { id: user._id, email: user.email, lastLoginAt: user.lastLoginAt },
             ACCESS_TOKEN_SECRET,
             ACCESS_TIMEOUT
         );
-
         const refreshToken = await Auth.jwtSign(
             { id: user._id, email: user.email, lastLoginAt: user.lastLoginAt },
             REFRESH_TOKEN_SECRET,
             REFRESH_TIMEOUT
         );
 
+        user.refreshToken = refreshToken;
+        user.lastLoginAt = new Date()
+        await user.save();
+
         req.session.token = refreshToken;
-        // res.cookie("token", refreshToken, {
-        //     maxAge: COOKIE_TIMEOUT,
-        //     httpOnly: true,
-        //     sameSite: "None",
-        //     secure: true,
-        // });
         res.status(200).json(accessToken);
 
     } catch (error) {
@@ -72,8 +58,8 @@ export const signup = async (req, res) => {
         // next(new Error(error.message.split(",")));
         // return res.status(500).json({ error: error.message.split(",") });
         console.log('error : ', error)
-        return res.status(409).json({error: customError})
-        
+        return res.status(409).json({ error: customError })
+
     }
 
 };
