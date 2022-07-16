@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const accessTimeout = 60 * 1;
-const refreshTimeout = 60 * 60 * 24;
+const refreshTimeout = 60 * 60 * 24 * 1;
 const cookieTimeout = 1 * 24 * 60 * 60 * 1000;
 export const {
     ACCESS_TIMEOUT = accessTimeout,
@@ -16,6 +16,7 @@ export const {
     SESSION_SECRET = process.env.SESSION_SECRET,
     COOKIE_SECRET = process.env.COOKIE_SECRET,
     PORT = process.env.PORT,
+    APIIP_KEY = process.env.APIIP_KEY,
 } = process.env;
 
 // require('crypto').randomBytes(64).toString('hex')

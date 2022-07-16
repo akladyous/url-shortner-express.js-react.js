@@ -1,8 +1,6 @@
 import express from 'express';
 export const shortUrlRoute = express.Router();
-// import { get } from '../../controllers/get.js'
-// import { post } from '../../controllers/post.js'
+import { shortUrlController } from '../controllers/url/shortUrlController.js'
 
-shortUrlRoute.get('/shorturl', () => { });
-shortUrlRoute.post('/shorturl', () => { });
+shortUrlRoute.get('/:shorturl', shortUrlController);
 

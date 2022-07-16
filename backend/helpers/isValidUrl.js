@@ -1,24 +1,19 @@
 import { URL } from 'url';
 import dns from 'node:dns';
-import { rejects } from 'assert';
 // import { callbackify } from 'util'
 
-export const isvalidUrl = (string = new String) => {
-    const urlInfo = {};
-    return new Promise((resolve, reject) => {
-        try {
-            const url = new URL(string)
-            urlInfo['data'] = url
-            dns.lookup(
-                url.hostname,
-                { family: 0, all: true, hints: dns.ALL },
-                (err, addresses) => {
-                    if (err) reject('invalid url')
-                    urlInfo['addresses'] = addresses
-                    resolve(urlInfo)
-                })
-        } catch {
-            reject(new Error('invalid url'))
-        }
-    })
+export const isvalidUrl = async (string = new String) => {
+    const urlInfo = {
+        data: { href: null, origin: null, protocol: null, hostname: null, port: null, pathname: null },
+        ipAddress: null
+    };
+    try {
+        const url = new URL(string)
+        Object.keys(urlInfo.data).forEach(key => { urlInfo.data[key] = url[key] })
+        const ip = await dns.promises.lookup(url.hostname, { family: 0, hints: dns.ADDRCONFIG || dns.V4MAPPED })
+        urlInfo.ipAddress = ip.address
+        return Promise.resolve(urlInfo)
+    } catch {
+        return Promise.reject(new Error('invalid url'))
+    }
 };

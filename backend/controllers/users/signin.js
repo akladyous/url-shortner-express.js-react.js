@@ -38,9 +38,14 @@ export const signin = async (req, res, next) => {
         user.lastLoginAt = new Date()
         await user.save();
 
-        req.session.token = refreshToken;
+        res.cookie("token", refreshToken, {
+            maxAge: COOKIE_TIMEOUT,
+            httpOnly: true,
+            // sameSite: "None",
+            secure: true,
+        });
         res.status(200).json(accessToken);
-
+        console.log('signin controller -> res.cookie : ', res.cookie)
     } catch (error) {
         next(error);
     }

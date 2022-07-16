@@ -10,10 +10,10 @@ export const authApiSlice = apiSlice.injectEndpoints({
             }),
             keepUnusedDataFor: 5
         }),
-        logout: build.mutation ({
+        logout: build.mutation({
             query: () => ({
                 url: '/users/signout',
-                method: "DELETE"
+                method: "delete"
             }),
             keepUnusedDataFor: 5
         }),
@@ -21,7 +21,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
             query: (credentials) => ({
                 url: '/users/signup',
                 method: 'POST',
-                body: {...credentials}
+                body: { ...credentials }
             }),
             keepUnusedDataFor: 5
         }),
@@ -29,7 +29,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
             query: (id, credentials) => ({
                 url: `users/update/${id}`,
                 method: 'PATCH',
-                body: {...credentials}
+                body: { ...credentials }
             }),
             keepUnusedDataFor: 5
         }),

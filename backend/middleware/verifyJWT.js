@@ -3,7 +3,6 @@ import { ACCESS_TOKEN_SECRET } from "../config/env.js";
 
 export const verifyJWT = (req, res, next) => {
     const { authorization } = req.headers;
-    debugger
     if (!authorization) {
         return res.status(401).json({ error: "Authentication Error - missing authorization token" });
     }

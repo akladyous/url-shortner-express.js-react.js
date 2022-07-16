@@ -10,8 +10,8 @@ export default function UsersLogout() {
     const state = useSelector(userState);
     const navigate = useNavigate();
 
-    const [logout ] = useLogoutMutation()
-    
+    const [logout] = useLogoutMutation()
+
     const handleSignOut = async (e) => {
         e.preventDefault();
 

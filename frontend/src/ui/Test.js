@@ -21,13 +21,11 @@ export default function Test() {
     // let [getUsers, {isLoading, isError, error}] = useGetUsersQuery()
     let [setUrl, { isError, isLoading }] = useSetUrlMutation();
 
-    const handleTest = (e) => {
+    const handleTest = async (e) => {
         e.preventDefault();
-        console.log("originalUrl : ", originalUrl);
-        setUrl({
-            url: "url",
-            data: { url: originalUrl },
-        });
+
+        const res = await setUrl({ url: "url", data: { originalUrl: originalUrl }, });
+        console.log('response : ', res)
         // dispatch(testAction());
         // getusers()
         // console.log('result : ', result)

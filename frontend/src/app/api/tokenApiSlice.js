@@ -32,26 +32,28 @@ const refreshToken = async (args, api, extraOptions) => {
     // }
 
     if (decoded) {
-        let response = await baseQuery(args ,api, extraOptions);
+        let response = await baseQuery(args, api, extraOptions);
         return response;
-    } 
+    }
 
     const response = await baseQuery("/refresh", api, extraOptions);
-    if (response?.error?.originalStatus === 401){
+    if (response?.error?.originalStatus === 401) {
         await api.dispatch(userSignOut());
         await api.dispatch(resetState());
-        return { error: {
-            status: 401,
-            statusText: "Token Expired",
-            data: "Authentication failed, please login again",
-        } };
+        return {
+            error: {
+                status: 401,
+                statusText: "Token Expired",
+                data: "Authentication failed, please login again",
+            }
+        };
     }
     if (response?.data) {
         await api.dispatch(setToken(response.data));
     }
 
     let result = await baseQuery(args, api, extraOptions);
-    console.log('result : ', result)
+    // console.log('result : ', result)
     return result;
 };
 

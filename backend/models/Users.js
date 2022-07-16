@@ -36,7 +36,8 @@ const userSchema = new Schema(
         refreshToken: {
             type: String,
             default: null
-        }
+        },
+        // urls: [{ type: Schema.Types.ObjectId, ref: 'User' }],
     },
     { timestamps: true, toJSON: { virtuals: true } }
 );

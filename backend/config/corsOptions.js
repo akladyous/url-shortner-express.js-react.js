@@ -5,11 +5,12 @@ export const corsOptions = {
         if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
             callback(null, true);
         } else {
+            console.log(`handleCors -> ${origin} is blocked by server`)
             callback(new Error("Request blocked by CORS policy"), false);
         }
     },
-    optionsSuccessStatus: 200,
-    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
-    "preflightContinue": false,
+    // optionsSuccessStatus: 200,
+    // "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+    // "preflightContinue": true,
     credentials: true,
 };

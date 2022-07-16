@@ -2,11 +2,6 @@ import mongoose from "mongoose"
 const { Schema } = mongoose;
 
 const clicksSchema = new Schema({
-    urls: [{
-        type: Schema.Types.ObjectId,
-        ref: "Urls",
-    }],
-    clicks: { type: Number, default: 0 },
     browser: {
         type: Map,
         of: new Schema({
@@ -42,7 +37,8 @@ const clicksSchema = new Schema({
             architecture: { type: String, default: null }
         })
     },
-    url: [{ type: Schema.Types.ObjectId, ref: 'URL' }]
+    countClicks: { type: Number, default: 0 },
+    url: [{ type: Schema.Types.ObjectId, ref: 'Url' }]
 }
     , { timestamps: true, toJSON: { virtuals: true } }
 );

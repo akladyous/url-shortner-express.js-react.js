@@ -1,20 +1,17 @@
 import express from "express";
-import session from "express-session";
 import cookieParser from "cookie-parser";
 import morgran from 'morgan'
 import { dbConnect } from "./config/dbConnect.js";
-import { sessionOptions } from "./config/sessionOptions.js";
-import { errorHandler, credentials, missingRoutes, handleCors } from "./middleware/middleware.js";
+import { errorHandler, credentials, missingRoutes, handleCors, } from "./middleware/middleware.js";
 import { routes } from "./routes/routes.js";
 import { PORT, COOKIE_SECRET } from './config/env.js'
 
 const app = express();
 // app.use(morgran('tiny'))
 app.use(morgran('IP :remote-addr :date[web] :method :url\t :status - :response-time ms'))
-app.use(credentials);
 app.use(cookieParser(COOKIE_SECRET));
-app.use(session(sessionOptions));
 app.use(handleCors());
+app.use(credentials);
 app.use(express.json());
 // app.use(csrfMiddleWare)
 routes(app)

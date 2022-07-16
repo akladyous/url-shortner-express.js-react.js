@@ -6,7 +6,6 @@ import {
     REFRESH_TIMEOUT,
     ACCESS_TOKEN_SECRET,
     ACCESS_TIMEOUT,
-    // COOKIE_TIMEOUT,
 } from "../../config/env.js";
 
 const handleErrors = (err) => {
@@ -49,9 +48,8 @@ export const signup = async (req, res) => {
         user.lastLoginAt = new Date()
         await user.save();
 
-        req.session.token = refreshToken;
+        res.cookie("token", refreshToken, { maxAge: REFRESH_TIMEOUT, httpOnly: true, sameSite: "None", secure: true });
         res.status(200).json(accessToken);
-
     } catch (error) {
         let customError = handleErrors(error);
         customError.status = 409
