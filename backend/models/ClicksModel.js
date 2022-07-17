@@ -2,45 +2,30 @@ import mongoose from "mongoose"
 const { Schema } = mongoose;
 
 const clicksSchema = new Schema({
-    browser: {
-        type: Map,
-        of: new Schema({
-            name: { type: String, default: null },
-            version: { type: String, default: null },
-        })
-    },
-    device: {
-        type: Map,
-        of: new Schema({
-            model: { type: String, default: null },
-            type: { type: String, default: null },
-            vendor: { type: String, default: null },
-        })
-    },
-    engine: {
-        type: Map,
-        of: new Schema({
-            name: { type: String, default: null },
-            version: { type: String, default: null }
-        })
-    },
-    os: {
-        type: Map,
-        of: new Schema({
-            name: { type: String, default: null },
-            version: { type: String, default: null },
-        })
-    },
-    cpu: {
-        type: Map,
-        of: new Schema({
-            architecture: { type: String, default: null }
-        })
-    },
-    countClicks: { type: Number, default: 0 },
-    url: [{ type: Schema.Types.ObjectId, ref: 'Url' }]
+    client: new Schema({
+        _id: false,
+        type: { type: String, default: null },
+        name: { type: String, default: null },
+        version: { type: String, default: null },
+        engine: { type: String, default: null },
+        engineVersion: { type: String, default: null },
+
+    }),
+    device: new Schema({
+        _id: false,
+        brand: { type: String, default: null },
+        model: { type: String, default: null },
+        type: { type: String, default: null },
+    }),
+    os: new Schema({
+        _id: false,
+        name: { type: String, default: null },
+        platform: { type: String, default: null },
+        version: { type: String, default: null },
+    }),
+    url: { type: Schema.Types.ObjectId, ref: 'Url' }
 }
     , { timestamps: true, toJSON: { virtuals: true } }
 );
 
-export default Clicks = mongoose.model("Clicks", clicksSchema);
+export const Clicks = mongoose.model("Clicks", clicksSchema);

@@ -8,6 +8,8 @@ import UsersLogin from "./users/UsersLogin.js";
 import UsersLogout from "./users/UsersLogout.js";
 import UsersSignup from "./users/UsersSignup.js";
 import UserState from "./auth/UserState.js";
+import ShortUrl from "./ui/ShortUrl.js";
+
 import Test from './ui/Test.js'
 
 function App() {
@@ -16,6 +18,7 @@ function App() {
             {/* <Header /> */}
             <UserState />
             <Routes>
+                <Route path="/:shorturl" element={<ShortUrl />} />
                 <Route path="/" element={<Layout />}>
                     <Route path="/" element={<Home />} />
 
