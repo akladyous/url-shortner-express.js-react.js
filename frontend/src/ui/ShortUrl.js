@@ -28,7 +28,7 @@ export default function ShortUrl() {
     // }
 
     useEffect(() => {
-        // debugger
+
         (async () => {
             if (params.shorturl.length === 8) {
                 const device = new DeviceDetector()
