@@ -15,7 +15,7 @@ export const shortUrlController = async (req, res, next) => {
         const newClick = new Clicks(userAgent)
         newClick.url = url.id
         await newClick.save()
-        console.log('clicksRecord : ', newClick.toJSON())
+
         return res.redirect(url.originalUrl)
     } catch (error) {
         console.log('error : ', error)
