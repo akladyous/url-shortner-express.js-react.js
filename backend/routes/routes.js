@@ -16,5 +16,9 @@ export const routes = (app) => {
     app.use('/api/*', verifyJWT)
     app.use('/api', urlsRoute)
     app.use('/api', testRoute)
+    app.use('/favicon', (req, res) => {
+        console.log('favicon')
+        res.sendStatus(200)
+    })
 };
 
