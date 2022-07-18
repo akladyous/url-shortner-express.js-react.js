@@ -109,7 +109,7 @@ export default function UsersLogin() {
                                     <input
                                         type="email"
                                         name="email"
-                                        className="form-control has-validation rounded-4"
+                                        className="form-control"
                                         autoComplete="off"
                                         placeholder=""
                                         value={email}
@@ -124,7 +124,7 @@ export default function UsersLogin() {
                                         type="password"
                                         name="password"
                                         aria-describedby="inputGroupPrepend"
-                                        className="form-control has-validation rounded-4"
+                                        className="form-control has-validation"
                                         placeholder=""
                                         value={password}
                                         onChange={(e) => { setPassword(e.target.value); }}
@@ -141,8 +141,8 @@ export default function UsersLogin() {
                                     <div className="col col-auto">
                                         <button
                                             type="submit"
-                                            // className="btn btn-light"
-                                            className="btn btn-form rounded-pill py-2 px-4"
+                                            // className="btn btn-light" 
+                                            className="btn btn-primary rounded-pill py-3 px-5"
                                             disabled={state.isAuthenticated}>
                                             Submit
                                         </button>

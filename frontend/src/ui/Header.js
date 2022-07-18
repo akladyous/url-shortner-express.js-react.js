@@ -5,121 +5,49 @@ export default function Header() {
     const state = useSelector(userState);
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <div className="container-fluid">
-                <Link className="navbar-brand" to="/">
-                    Navbar
-                </Link>
+        <nav className="navbar navbar-expand-lg navbar-light">
 
-                <button
-                    className="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-                >
-                    <span className="navbar-toggler-icon"></span>
-                </button>
+            <a href="/" className="navbar-brand p-0">
+                {/* <img src='../assets/images/favicon.ico' alt="Logo" /> */}
+                <h1 className="m-0">URL </h1>
+            </a>
+            <button
+                className="navbar-toggler rounded-pill"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarCollapse">
+                <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className="collapse navbar-collapse" id="navbarCollapse">
+                <div className="navbar-nav mx-auto py-0">
 
-                <div
-                    className="collapse navbar-collapse w-100"
-                    id="navbarSupportedContent"
-                >
-                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li className="nav-item">
-                            <Link
-                                className="nav-link active"
-                                aria-current="page"
-                                to="/"
-                            >
-                                Home
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="test">
-                                Link
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link disabled" to="/">
-                                Disabled
-                            </Link>
-                        </li>
-                    </ul>
-                    {/* ----------------------------------------------------- */}
-                    <div className="d-flex">
-                        <span className="px-2">{state.isAuthenticated ? state.user.email : ""}</span>
-                        <ul className="navbar-nav">
-                            <li className="nav-item dropdown">
-                                <button
-                                    className="btn btn-light dropdown-toggle p-0 "
-                                    type="button"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                                >
-                                    User
-                                </button>
-                                <ul
-                                    className="dropdown-menu dropdown-menu-end"
-                                    aria-labelledby="navbarDropdown"
-                                >
-                                    <li>
-                                        <Link
-                                            className={`dropdown-item ${
-                                                state.isAuthenticated
-                                                    ? ""
-                                                    : "disabled"
-                                            }`}
-                                            to="users"
-                                        >
-                                            Dashboard
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link
-                                            className={`dropdown-item ${
-                                                !state.isAuthenticated
-                                                    ? ""
-                                                    : "disabled"
-                                            }`}
-                                            to="users/signin"
-                                        >
-                                            Login
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link
-                                            className={`dropdown-item ${
-                                                state.isAuthenticated
-                                                    ? ""
-                                                    : "disabled"
-                                            }`}
-                                            to="users/logout"
-                                        >
-                                            Logout
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link
-                                            className={`dropdown-item ${
-                                                !state.isAuthenticated
-                                                    ? ""
-                                                    : "disabled"
-                                            }`}
-                                            to="users/signup"
-                                        >
-                                            Sign Up
-                                        </Link>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
+                    {/* <Link className="nav-item nav-link" aria-current="page" to="#home" >Home</Link>
+                    <Link className="nav-item nav-link" aria-current="page" to="#about" >About</Link>
+                    <Link className="nav-item nav-link" aria-current="page" to="#overview" >Overview</Link>
+                    <Link className="nav-item nav-link" aria-current="page" to="#features" >Features</Link>
+                    <Link className="nav-item nav-link" aria-current="page" to="#pricing" >Pricing</Link>
+                    <Link className="nav-item nav-link" aria-current="page" to="#testimonial" >Testimonial</Link>
+                    <Link className="nav-item nav-link" aria-current="page" to="#contact" >Contact</Link> */}
 
-                    {/* ----------------------------------------------------- */}
+                    <a href="#home" className="nav-item nav-link">Home</a>
+                    <a href="#about" className="nav-item nav-link">About</a>
+                    <a href="#overview" className="nav-item nav-link">Overview</a>
+                    <a href="#features" className="nav-item nav-link">Features</a>
+                    <a href="#pricing" className="nav-item nav-link">Pricing</a>
+                    <a href="#testimonial" className="nav-item nav-link">Testimonial</a>
+                    <a href="#contact" className="nav-item nav-link">Contact</a>
+
                 </div>
+                <Link
+                    className="btn btn-light rounded-pill py-2 px-4 ms-3 d-none d-lg-block"
+                    to={state.isAuthenticated ? 'users/logout' : 'users/signin'}
+                >
+                    {state.isAuthenticated ? 'Logout' : 'Login'}
+                </Link>
+                {/* <a href="/" className="btn btn-light rounded-pill py-2 px-4 ms-3 d-none d-lg-block">Login</a> */}
+                <a href="/" className="btn btn-light rounded-pill py-2 px-4 ms-3 d-none d-lg-block">
+                    Singup
+                </a>
             </div>
         </nav>
     );
