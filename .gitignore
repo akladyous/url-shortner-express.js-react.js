@@ -1,0 +1,17 @@
+
+.DS_Store
+.vscode 
+
+pids
+*.pid
+*.seed
+*.pid.lock
+
+**/node_modules/
+
+
+**/.env*
+
+
+
+.webpack/

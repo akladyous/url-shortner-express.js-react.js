@@ -4,11 +4,14 @@ import { saveState, loadState } from "./localStorage.js";
 import { apiSlice } from "../app/api/apiSlice.js";
 import { tokenApiSlice } from "../app/api/tokenApiSlice.js";
 
-
 import testReducer from "../features/testSlice.js";
 
-import tokenReducer, { initialState as tokenState } from "../features/token/tokenSlice.js";
-import userReducer, { initialState as userState } from "../features/users/userSlice.js";
+import tokenReducer, {
+    initialState as tokenState,
+} from "../features/token/tokenSlice.js";
+import userReducer, {
+    initialState as userState,
+} from "../features/users/userSlice.js";
 
 export const store = configureStore({
     reducer: {
@@ -17,8 +20,6 @@ export const store = configureStore({
         test: testReducer,
         [apiSlice.reducerPath]: apiSlice.reducer,
         [tokenApiSlice.reducerPath]: tokenApiSlice.reducer,
-
-
     },
     middleware: (getDefaultMiddleware) => [
         ...getDefaultMiddleware({ serializableCheck: false }).prepend(
