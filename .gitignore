@@ -1,17 +1,17 @@
+.vscode/*
 
-.DS_Store
-.vscode 
-
-pids
-*.pid
-*.seed
-*.pid.lock
-
+# typescript
+**/*.tsbuildinfo
+**/next-env.d.ts
+**/logs/
 **/node_modules/
-
-
 **/.env*
+**/.env*.local
+**/.DS_Store
+**/*.log
+**/.cache
 
 
-
-.webpack/
+**/.next/
+**/out/
+**/build
